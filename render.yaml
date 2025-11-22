@@ -1,0 +1,23 @@
+databases:
+  - name: bitiyatro-db
+    databaseName: bitiyatro
+    user: bitiyatro
+    plan: free # Optional: defaults to the lowest cost plan
+
+services:
+  - type: web
+    name: bitiyatro
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bitiyatro-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: WEB_CONCURRENCY
+        value: 2
