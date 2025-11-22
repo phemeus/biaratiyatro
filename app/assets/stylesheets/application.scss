@@ -1,0 +1,115 @@
+// Brand Colors
+$brand-yellow: #efc51b;
+$brand-black: #000000;
+$brand-pink: #f70364;
+$brand-dark-grey: #161616;
+$brand-white: #ffffff;
+
+// Bootstrap Overrides
+$primary: $brand-yellow;
+$secondary: $brand-pink;
+$dark: $brand-black;
+$light: $brand-white;
+$body-bg: $brand-black;
+$body-color: $brand-white;
+
+// Fonts
+$font-family-sans-serif: 'Jost', sans-serif;
+$headings-font-family: 'Bungee', cursive;
+
+// Import Bootstrap
+@import "bootstrap";
+
+// Custom Styles
+body {
+    font-family: 'Jost', sans-serif;
+    background-color: $brand-black;
+    color: $brand-white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
+    font-family: 'Bungee', cursive;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.text-primary {
+    color: $brand-yellow !important;
+}
+
+.bg-primary {
+    background-color: $brand-yellow !important;
+    color: $brand-black !important;
+}
+
+.btn-primary {
+    background-color: $brand-yellow;
+    border-color: $brand-yellow;
+    color: $brand-black;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0; // Sharp edges for modern look
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: darken($brand-yellow, 10%);
+        border-color: darken($brand-yellow, 10%);
+        color: $brand-black;
+        transform: translateY(-2px);
+        box-shadow: 4px 4px 0 $brand-pink;
+    }
+}
+
+.btn-outline-light {
+    border-radius: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: $brand-white;
+        color: $brand-black;
+        transform: translateY(-2px);
+        box-shadow: 4px 4px 0 $brand-yellow;
+    }
+}
+
+.card {
+    background-color: $brand-dark-grey;
+    border: 1px solid rgba($brand-white, 0.1);
+    border-radius: 0; // Sharp edges
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: $brand-yellow;
+        box-shadow: 8px 8px 0 $brand-pink;
+    }
+}
+
+.navbar {
+    background-color: $brand-black !important;
+    border-bottom: 2px solid $brand-dark-grey;
+
+    .nav-link {
+        font-family: 'Bungee', cursive;
+        font-size: 0.9rem;
+        color: rgba($brand-white, 0.7) !important;
+
+        &:hover,
+        &.active {
+            color: $brand-yellow !important;
+        }
+    }
+}
+
+.badge {
+    border-radius: 0;
+    font-family: 'Bungee', cursive;
+    font-weight: normal;
+}

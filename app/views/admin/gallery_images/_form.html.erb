@@ -1,0 +1,28 @@
+<%= form_with(model: [:admin, gallery_image], local: true, class: "needs-validation") do |f| %>
+  <% if gallery_image.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Hata!</h4>
+      <p><%= gallery_image.errors.count %> hata nedeniyle kaydedilemedi:</p>
+      <ul class="mb-0">
+        <% gallery_image.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :title, "Başlık", class: "form-label" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :url, "Görsel URL", class: "form-label" %>
+    <%= f.text_field :url, class: "form-control" %>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <%= link_to "İptal", admin_gallery_images_path, class: "btn btn-outline-secondary" %>
+    <%= f.submit "Kaydet", class: "btn btn-primary" %>
+  </div>
+<% end %>

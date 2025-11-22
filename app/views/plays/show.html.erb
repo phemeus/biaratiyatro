@@ -1,0 +1,79 @@
+<div class="bg-black min-vh-100">
+  <!-- Hero Image -->
+  <div class="position-relative" style="height: 70vh;">
+    <% if @play.image_url.present? %>
+      <img src="<%= @play.image_url %>" alt="<%= @play.title %>" class="w-100 h-100 object-fit-cover opacity-50" style="filter: grayscale(100%);">
+    <% else %>
+      <div class="w-100 h-100 bg-secondary opacity-50"></div>
+    <% end %>
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-to-t from-black to-transparent"></div>
+    
+    <div class="position-absolute bottom-0 start-0 w-100 p-4 p-md-5">
+      <div class="container">
+        <span class="badge bg-primary text-black mb-3 fs-5 px-3 py-2 rounded-0">
+          <%= @play.date&.strftime("%d %B %Y, %H:%M") %>
+        </span>
+        <h1 class="display-1 fw-bold text-white mb-3 text-uppercase" style="text-shadow: 2px 2px 0 #000;"><%= @play.title %></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+      <!-- Main Content -->
+      <div class="col-lg-8">
+        <!-- Description -->
+        <div class="mb-5">
+          <h2 class="h3 fw-bold text-white mb-4 border-start border-4 border-primary ps-3 text-uppercase">Oyun Hakkında</h2>
+          <div class="text-white-50 lead fs-5">
+            <%= simple_format(@play.description) %>
+          </div>
+        </div>
+
+        <!-- YouTube Video -->
+        <% if @play.youtube_url.present? %>
+          <div class="mb-5">
+            <h2 class="h3 fw-bold text-white mb-4 border-start border-4 border-danger ps-3 text-uppercase">Fragmanı İzle</h2>
+            <div class="ratio ratio-16x9 overflow-hidden shadow-lg border border-secondary">
+              <% 
+                # Simple regex to extract video ID if full URL is provided
+                video_id = @play.youtube_url.scan(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/).flatten.first
+                embed_url = video_id ? "https://www.youtube.com/embed/#{video_id}" : @play.youtube_url
+              %>
+              <iframe src="<%= embed_url %>" allowfullscreen></iframe>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="d-flex flex-column gap-4 sticky-top" style="top: 100px;">
+          <div class="card bg-dark border-secondary text-white rounded-0">
+            <div class="card-body p-4">
+              <h3 class="h5 fw-bold mb-3 text-uppercase text-primary">Bilet Bilgisi</h3>
+              <p class="text-white-50 mb-4">Bu muhteşem performansı kaçırmayın. Biletlerinizi hemen ayırtın!</p>
+              <button class="btn btn-primary w-100 py-3 fw-bold fs-5 text-uppercase">
+                Bilet Al
+              </button>
+            </div>
+          </div>
+
+          <div class="card bg-dark border-secondary text-white rounded-0">
+            <div class="card-body p-4">
+              <h3 class="h5 fw-bold mb-3 text-uppercase text-white">Paylaş</h3>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-light rounded-0 p-2 d-flex align-items-center justify-content-center flex-grow-1">
+                  Twitter
+                </button>
+                <button class="btn btn-outline-light rounded-0 p-2 d-flex align-items-center justify-content-center flex-grow-1">
+                  Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

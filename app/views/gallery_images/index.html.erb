@@ -1,0 +1,37 @@
+<div class="bg-black py-5 min-vh-100">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-3 fw-bold text-white text-uppercase mb-2">Galeri</h1>
+      <div class="bg-primary mx-auto" style="width: 100px; height: 4px;"></div>
+    </div>
+    
+    <div class="row g-4" data-masonry='{"percentPosition": true }'>
+      <% @gallery_images.each do |image| %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card border-0 shadow-lg overflow-hidden bg-dark text-white rounded-0">
+            <img src="<%= image.url %>" alt="<%= image.title %>" class="card-img w-100 h-auto grayscale-hover transition-all">
+            <div class="card-img-overlay d-flex align-items-end p-0">
+              <div class="bg-gradient-to-t from-black w-100 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                <h5 class="card-title mb-0 text-uppercase fw-bold text-primary"><%= image.title %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Masonry JS -->
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" async></script>
+
+<style>
+  .grayscale-hover {
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+  }
+  .card:hover .grayscale-hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+</style>

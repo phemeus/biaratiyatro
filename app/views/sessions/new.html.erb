@@ -1,0 +1,56 @@
+<div class="bg-black min-vh-100 d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="text-center mb-5">
+          <h1 class="display-4 fw-bold text-white mb-0">Bİ’ARA TİYATRO</h1>
+          <p class="text-primary fw-bold text-uppercase letter-spacing-2">Yönetim Paneli</p>
+        </div>
+
+        <div class="card bg-dark border-secondary text-white shadow-lg rounded-0">
+          <div class="card-body p-5">
+            <% if flash[:alert] %>
+              <div class="alert alert-danger rounded-0 mb-4 border-0 border-start border-4 border-danger bg-danger bg-opacity-10 text-white">
+                <%= flash[:alert] %>
+              </div>
+            <% end %>
+
+            <% if flash[:notice] %>
+              <div class="alert alert-success rounded-0 mb-4 border-0 border-start border-4 border-success bg-success bg-opacity-10 text-white">
+                <%= flash[:notice] %>
+              </div>
+            <% end %>
+
+            <%= form_with url: login_path, local: true do |f| %>
+              <div class="mb-4">
+                <%= f.label :username, "Kullanıcı Adı", class: "form-label text-uppercase small fw-bold text-white-50" %>
+                <%= f.text_field :username, class: "form-control bg-black border-secondary text-white rounded-0 py-2 focus-primary", required: true %>
+              </div>
+
+              <div class="mb-5">
+                <%= f.label :password, "Şifre", class: "form-label text-uppercase small fw-bold text-white-50" %>
+                <%= f.password_field :password, class: "form-control bg-black border-secondary text-white rounded-0 py-2 focus-primary", required: true %>
+              </div>
+
+              <%= f.submit "GİRİŞ YAP", class: "btn btn-primary w-100 py-3 fw-bold fs-5 text-uppercase rounded-0" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <%= link_to "← Siteye Dön", root_path, class: "text-white-50 text-decoration-none hover-white small text-uppercase" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .focus-primary:focus {
+    border-color: #efc51b;
+    box-shadow: 0 0 0 0.25rem rgba(239, 197, 27, 0.25);
+  }
+  .letter-spacing-2 {
+    letter-spacing: 2px;
+  }
+</style>

@@ -1,0 +1,40 @@
+<div class="bg-black py-5 min-vh-100">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-3 fw-bold text-white text-uppercase mb-2">Ekibimiz</h1>
+      <div class="bg-primary mx-auto" style="width: 100px; height: 4px;"></div>
+    </div>
+    
+    <div class="row g-5 justify-content-center">
+      <% @staffs.each do |staff| %>
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 bg-dark border-secondary text-white shadow-lg text-center p-4 rounded-0">
+            <div class="mx-auto mb-4 rounded-circle overflow-hidden border border-4 border-primary" style="width: 140px; height: 140px;">
+              <% if staff.photo_url.present? %>
+                <img src="<%= staff.photo_url %>" alt="<%= staff.name %>" class="w-100 h-100 object-fit-cover grayscale-hover transition-all">
+              <% else %>
+                <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center">
+                  <svg width="48" height="48" class="text-white-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
+              <% end %>
+            </div>
+            <h3 class="h5 fw-bold text-white mb-1 text-uppercase"><%= staff.name %></h3>
+            <p class="text-primary small fw-bold mb-3 text-uppercase"><%= staff.role %></p>
+            <p class="text-white-50 small mb-0"><%= staff.bio %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .grayscale-hover {
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+  }
+  .card:hover .grayscale-hover {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+  }
+</style>

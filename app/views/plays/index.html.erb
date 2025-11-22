@@ -1,0 +1,45 @@
+<div class="bg-black py-5 min-vh-100">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-3 fw-bold text-white text-uppercase mb-2">Repertuarımız</h1>
+      <div class="bg-primary mx-auto" style="width: 100px; height: 4px;"></div>
+    </div>
+    
+    <div class="row g-5">
+      <% @plays.each do |play| %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 bg-dark border-secondary text-white shadow-lg">
+            <div class="position-relative" style="height: 350px; overflow: hidden;">
+              <% if play.image_url.present? %>
+                <img src="<%= play.image_url %>" alt="<%= play.title %>" class="card-img-top w-100 h-100 object-fit-cover grayscale-hover transition-all">
+              <% else %>
+                <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center">
+                  <span class="text-white-50">Görsel Yok</span>
+                </div>
+              <% end %>
+              <div class="position-absolute top-0 start-0 m-0">
+                <span class="badge bg-primary text-black fs-6 px-3 py-2 rounded-0"><%= play.date&.strftime("%d.%m.%Y") %></span>
+              </div>
+            </div>
+            <div class="card-body d-flex flex-column p-4 border-top border-secondary">
+              <h3 class="h4 card-title fw-bold mb-3 text-uppercase"><%= play.title %></h3>
+              <p class="card-text text-white-50 small mb-4 flex-grow-1"><%= truncate(play.description, length: 150) %></p>
+              <%= link_to "DETAYLARI GÖR", play_path(play.id), class: "btn btn-outline-primary w-100 mt-auto" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .grayscale-hover {
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+  }
+  .card:hover .grayscale-hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+</style>
