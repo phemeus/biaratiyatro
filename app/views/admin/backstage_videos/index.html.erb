@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 text-white">Backstage Videoları</h1>
+  <%= link_to "Yeni Video Ekle", new_admin_backstage_video_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card bg-dark border-secondary shadow-lg">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-dark table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th class="ps-4 text-white-50">Başlık</th>
+            <th class="text-white-50">URL</th>
+            <th class="text-center pe-4 text-white-50">İşlemler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @videos.each do |video| %>
+            <tr>
+              <td class="ps-4 fw-medium text-white"><%= video.title %></td>
+              <td class="text-white-50 text-truncate" style="max-width: 300px;"><%= video.youtube_url %></td>
+              <td class="text-center pe-4">
+                <div class="btn-group btn-group-sm">
+                  <%= link_to edit_admin_backstage_video_path(video.id), class: "btn btn-outline-light", title: "Düzenle" do %>
+                    <i class="bi bi-pencil"></i>
+                  <% end %>
+                  <%= button_to admin_backstage_video_path(video.id), method: :delete, class: "btn btn-outline-danger", form: { class: "d-inline" }, form_class: "d-inline", title: "Sil", data: { turbo_confirm: "Emin misiniz?" } do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

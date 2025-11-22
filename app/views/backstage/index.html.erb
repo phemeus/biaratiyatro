@@ -1,0 +1,63 @@
+<div class="bg-black py-5 min-vh-100">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-3 fw-bold text-white text-uppercase mb-2">Backstage</h1>
+      <div class="bg-primary mx-auto" style="width: 100px; height: 4px;"></div>
+      <p class="lead text-white-50 mt-3">Sahne arkasındaki heyecana ortak olun.</p>
+    </div>
+
+    <div class="row g-4">
+      <% if @videos.any? %>
+        <% @videos.each do |video| %>
+          <% 
+            # Extract YouTube ID
+            youtube_id = video.youtube_url.to_s.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)
+            youtube_id = youtube_id[1] if youtube_id
+          %>
+          <% if youtube_id %>
+            <div class="col-md-6 col-lg-4">
+              <%= link_to backstage_path(video.id), class: "text-decoration-none" do %>
+                <div class="card bg-dark border-secondary h-100 shadow-lg hover-lift transition-all">
+                  <div class="position-relative ratio ratio-16x9 border-bottom border-secondary overflow-hidden">
+                    <img src="https://img.youtube.com/vi/<%= youtube_id %>/mqdefault.jpg" class="w-100 h-100 object-fit-cover opacity-75 hover-opacity-100 transition-all" alt="<%= video.title %>">
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                      <i class="bi bi-play-circle-fill text-white display-4 opacity-75 hover-scale"></i>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title text-white fw-bold mb-2 text-uppercase"><%= video.title %></h5>
+                    <% if video.description.present? %>
+                      <p class="card-text text-white-50 small"><%= truncate(video.description, length: 100) %></p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div class="col-12 text-center py-5">
+          <div class="text-white-50 fs-5">Henüz video eklenmemiş.</div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hover-lift:hover {
+    transform: translateY(-5px);
+  }
+  .hover-opacity-100:hover {
+    opacity: 1 !important;
+  }
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  .card:hover .hover-scale {
+    transform: scale(1.1);
+  }
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+</style>

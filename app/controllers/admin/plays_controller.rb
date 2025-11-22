@@ -43,7 +43,7 @@ module Admin
     private
 
     def play_params
-      params.require(:play).permit(:title, :description, :date, :image_url, :youtube_url)
+      params.require(:play).permit(:title, :description, :date, :image_url, :youtube_url, :ticket_url)
     end
   end
 end

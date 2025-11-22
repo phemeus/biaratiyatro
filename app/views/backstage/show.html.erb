@@ -1,0 +1,36 @@
+<div class="bg-black py-5 min-vh-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <nav aria-label="breadcrumb" class="mb-4">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "BACKSTAGE", backstage_index_path, class: "text-white-50 text-decoration-none hover-primary" %></li>
+            <li class="breadcrumb-item active text-white" aria-current="page"><%= @video.title %></li>
+          </ol>
+        </nav>
+
+        <h1 class="display-4 fw-bold text-white text-uppercase mb-4"><%= @video.title %></h1>
+        
+        <% if @video.description.present? %>
+          <div class="lead text-white-50 mb-5 fs-5" style="white-space: pre-wrap;"><%= @video.description %></div>
+        <% end %>
+
+        <% 
+          # Extract YouTube ID
+          youtube_id = @video.youtube_url.to_s.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)
+          youtube_id = youtube_id[1] if youtube_id
+        %>
+        
+        <% if youtube_id %>
+          <div class="ratio ratio-16x9 shadow-lg border border-secondary mb-5">
+            <iframe src="https://www.youtube.com/embed/<%= youtube_id %>" title="<%= @video.title %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        <% end %>
+
+        <div class="text-center">
+          <%= link_to "Tüm Videolara Dön", backstage_index_path, class: "btn btn-outline-light px-4 py-2" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

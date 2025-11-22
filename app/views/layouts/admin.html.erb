@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -16,37 +17,61 @@
   </head>
 
   <body class="bg-black text-white">
-    <div class="d-flex" style="min-height: 100vh;">
+    <div class="d-md-flex" style="min-height: 100vh;">
+      <!-- Mobile Sidebar Toggle -->
+      <div class="d-md-none bg-dark p-3 border-bottom border-secondary d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-primary fs-5">Bİ’ARA TİYATRO PANEL</h4>
+        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebar" aria-controls="adminSidebar">
+          <i class="bi bi-list fs-4"></i>
+        </button>
+      </div>
+
       <!-- Sidebar -->
-      <aside class="bg-dark text-white p-3 d-flex flex-column border-end border-secondary" style="width: 250px;">
-        <div class="text-center mb-4 border-bottom border-secondary pb-3">
+      <aside class="bg-dark text-white p-3 d-flex flex-column border-end border-secondary offcanvas-md offcanvas-start" tabindex="-1" id="adminSidebar" aria-labelledby="adminSidebarLabel" style="width: 250px; min-height: 100vh;">
+        <div class="offcanvas-header d-md-none">
+          <h5 class="offcanvas-title text-primary" id="adminSidebarLabel">MENÜ</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#adminSidebar" aria-label="Close"></button>
+        </div>
+        
+        <div class="text-center mb-4 border-bottom border-secondary pb-3 d-none d-md-block">
           <h4 class="mb-0 text-primary">Bİ’ARA TİYATRO PANEL</h4>
         </div>
-        <nav class="flex-grow-1">
-          <ul class="nav nav-pills flex-column mb-auto gap-2">
+
+        <nav class="flex-grow-1 offcanvas-body p-0">
+          <ul class="nav nav-pills flex-column mb-auto gap-2 w-100">
             <li class="nav-item">
               <%= link_to admin_root_path, class: "nav-link text-white #{request.path == admin_root_path ? 'active' : ''}" do %>
-                Panel
+                <i class="bi bi-speedometer2 me-2"></i> Panel
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to admin_plays_path, class: "nav-link text-white #{request.path.include?('plays') ? 'active' : ''}" do %>
-                Oyunlar
+                <i class="bi bi-ticket-perforated me-2"></i> Oyunlar
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to admin_staffs_path, class: "nav-link text-white #{request.path.include?('staffs') ? 'active' : ''}" do %>
-                Ekip
+                <i class="bi bi-people me-2"></i> Ekip
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to admin_posts_path, class: "nav-link text-white #{request.path.include?('posts') ? 'active' : ''}" do %>
-                Blog / Haberler
+                <i class="bi bi-journal-text me-2"></i> Blog / Haberler
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to admin_gallery_images_path, class: "nav-link text-white #{request.path.include?('gallery') ? 'active' : ''}" do %>
-                Galeri
+                <i class="bi bi-images me-2"></i> Galeri
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_backstage_videos_path, class: "nav-link text-white #{request.path.include?('backstage') ? 'active' : ''}" do %>
+                <i class="bi bi-youtube me-2"></i> Backstage
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_testimonials_path, class: "nav-link text-white #{request.path.include?('testimonials') ? 'active' : ''}" do %>
+                <i class="bi bi-chat-quote me-2"></i> Yorumlar
               <% end %>
             </li>
           </ul>

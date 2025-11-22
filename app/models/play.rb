@@ -4,6 +4,7 @@ class Play < ApplicationFirebaseModel
   attribute :date, :datetime
   attribute :image_url, :string
   attribute :youtube_url, :string
+  attribute :ticket_url, :string
 
   validates :title, presence: true
 end

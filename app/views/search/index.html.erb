@@ -1,0 +1,44 @@
+<div class="bg-black py-5 min-vh-100">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-4 fw-bold text-white text-uppercase mb-2">Arama Sonuçları</h1>
+      <p class="lead text-white-50">"<%= @query %>" için <%= @results.count %> sonuç bulundu.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <% if @results.any? %>
+          <div class="list-group rounded-0">
+            <% @results.each do |result| %>
+              <a href="<%= result[:url] %>" class="list-group-item list-group-item-action bg-dark text-white border-secondary p-4 mb-3 hover-lift">
+                <div class="d-flex w-100 justify-content-between align-items-center mb-2">
+                  <h5 class="mb-0 fw-bold text-uppercase"><%= result[:title] %></h5>
+                  <span class="badge <%= result[:type] == 'Oyun' ? 'bg-primary text-black' : 'bg-warning text-black' %>"><%= result[:type] %></span>
+                </div>
+                <% if result[:date] %>
+                  <small class="text-white-50"><%= l(result[:date], format: :long) %></small>
+                <% end %>
+              </a>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-5 border border-secondary border-dashed rounded">
+            <i class="bi bi-search display-1 text-white-50 mb-3"></i>
+            <p class="text-white-50 fs-5">Aradığınız kriterlere uygun sonuç bulunamadı.</p>
+            <%= link_to "Ana Sayfaya Dön", root_path, class: "btn btn-outline-light mt-3" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hover-lift {
+    transition: transform 0.2s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    z-index: 1;
+  }
+</style>

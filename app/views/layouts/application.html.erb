@@ -7,13 +7,15 @@
     <%= csp_meta_tag %>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"></script>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
@@ -31,7 +33,7 @@
               <%= link_to "OYUNLAR", plays_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to "EKİP", staffs_path, class: "nav-link" %>
+              <%= link_to "HAKKIMIZDA", staffs_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "BLOG", posts_path, class: "nav-link" %>
@@ -39,10 +41,41 @@
             <li class="nav-item">
               <%= link_to "GALERİ", gallery_images_path, class: "nav-link" %>
             </li>
+            <li class="nav-item">
+              <%= link_to "BACKSTAGE", backstage_index_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "İLETİŞİM", contacts_path, class: "nav-link #{current_page?(contacts_path) ? 'active' : ''}" %>
+            </li>
+            <li class="nav-item ms-lg-3">
+              <button class="btn btn-link nav-link text-white" data-bs-toggle="modal" data-bs-target="#searchModal">
+                <i class="bi bi-search"></i>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white border-secondary">
+          <div class="modal-header border-secondary">
+            <h5 class="modal-title">Arama Yap</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with(url: search_path, method: :get, local: true, class: "d-flex gap-2") do |f| %>
+              <%= f.text_field :q, class: "form-control bg-black text-white border-secondary", placeholder: "Oyun veya yazı ara...", autofocus: true %>
+              <%= f.button class: "btn btn-primary text-black" do %>
+                <i class="bi bi-search"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <main class="flex-grow-1">
       <%= yield %>
@@ -63,12 +96,33 @@
               <li><%= link_to "Hakkımızda", staffs_path, class: "text-decoration-none text-white-50 hover-primary" %></li>
             </ul>
           </div>
-          <div class="col-md-3">
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-white text-uppercase mb-4 fw-bold">Bülten</h5>
+            <p class="text-white-50 mb-4">Yeni oyunlardan ve etkinliklerden haberdar olmak için bültenimize abone olun.</p>
+            <%= form_with(model: Subscriber.new, url: subscribers_path, local: true, class: "input-group") do |f| %>
+              <%= f.email_field :email, class: "form-control bg-dark text-white border-secondary", placeholder: "E-posta adresiniz", required: true %>
+              <%= f.button class: "btn btn-primary text-black fw-bold" do %>
+                <i class="bi bi-send-fill"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-lg-3 col-md-6">
             <h5 class="text-white mb-3 font-monospace text-uppercase">İletişim</h5>
-            <div class="d-flex gap-3">
-              <a href="#" class="text-white-50 hover-primary">Twitter</a>
-              <a href="#" class="text-white-50 hover-primary">Instagram</a>
-            </div>
+            <ul class="list-unstyled text-white-50">
+              <li class="mb-2">
+                <a href="mailto:biaratiyatro@gmail.com" class="text-decoration-none text-white-50 hover-primary">
+                  biaratiyatro@gmail.com
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="https://instagram.com/biaratiyatro" target="_blank" class="text-decoration-none text-white-50 hover-primary">
+                  <i class="bi bi-instagram me-1"></i> @biaratiyatro
+                </a>
+              </li>
+              <li class="mb-1">0539 366 88 98</li>
+              <li class="mb-1">0545 778 66 76</li>
+              <li class="mb-1">0543 453 71 01</li>
+            </ul>
           </div>
         </div>
         <div class="text-center mt-4 pt-4 border-top border-secondary">

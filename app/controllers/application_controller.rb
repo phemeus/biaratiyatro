@@ -1,4 +1,11 @@
 class ApplicationController < ActionController::Base
+  before_action :set_locale
+
+  private
+
+  def set_locale
+    I18n.locale = :tr
+  end
   helper_method :current_admin, :logged_in?
 
   def current_admin

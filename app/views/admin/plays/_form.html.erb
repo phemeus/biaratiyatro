@@ -32,8 +32,13 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :youtube_url, "YouTube Video URL", class: "form-label" %>
-    <%= f.text_field :youtube_url, class: "form-control" %>
+    <%= f.label :youtube_url, "YouTube Fragman URL", class: "form-label text-white" %>
+    <%= f.text_field :youtube_url, class: "form-control bg-dark text-white border-secondary focus-primary", placeholder: "https://www.youtube.com/watch?v=..." %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :ticket_url, "Bilet Satış Linki (Biletinial vb.)", class: "form-label text-white" %>
+    <%= f.text_field :ticket_url, class: "form-control bg-dark text-white border-secondary focus-primary", placeholder: "https://biletinial.com/..." %>
   </div>
 
   <div class="d-flex justify-content-end gap-2">

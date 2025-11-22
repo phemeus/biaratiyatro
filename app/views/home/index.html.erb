@@ -1,9 +1,5 @@
 <!-- Hero Section -->
 <div class="position-relative d-flex align-items-center justify-content-center text-center text-white" style="height: 85vh; background-color: #000; overflow: hidden;">
-  <div class="position-absolute w-100 h-100">
-    <img src="https://images.unsplash.com/photo-1507676184212-d03ab07a11d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Theater Stage" class="w-100 h-100 object-fit-cover opacity-50" style="filter: grayscale(100%);">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
-  </div>
   
   <div class="position-relative z-1 px-3" style="max-width: 900px;">
     <h1 class="display-1 fw-bold mb-4 text-uppercase" style="line-height: 0.9;">
@@ -27,6 +23,46 @@
     </div>
     <%= link_to "TÜMÜNÜ GÖR", plays_path, class: "text-primary text-decoration-none fw-bold fs-5 hover-underline" %>
   </div>
+
+  <% if @next_play %>
+    <div class="card bg-dark border-secondary shadow-lg mb-5 overflow-hidden">
+      <div class="row g-0">
+        <div class="col-md-8 p-4 d-flex flex-column justify-content-center">
+          <span class="badge bg-primary text-black align-self-start mb-3">SIRADAKİ OYUN</span>
+          <h3 class="display-5 fw-bold text-white text-uppercase mb-2"><%= @next_play.title %></h3>
+          <p class="text-white-50 fs-5 mb-4"><%= l(@next_play.date, format: :long) %></p>
+          
+          <div class="d-flex gap-4 text-center mb-4" id="countdown" data-date="<%= @next_play.date.iso8601 %>">
+            <div>
+              <div class="display-4 fw-bold text-white" id="days">00</div>
+              <div class="text-white-50 small text-uppercase">Gün</div>
+            </div>
+            <div>
+              <div class="display-4 fw-bold text-white" id="hours">00</div>
+              <div class="text-white-50 small text-uppercase">Saat</div>
+            </div>
+            <div>
+              <div class="display-4 fw-bold text-white" id="minutes">00</div>
+              <div class="text-white-50 small text-uppercase">Dakika</div>
+            </div>
+            <div>
+              <div class="display-4 fw-bold text-white" id="seconds">00</div>
+              <div class="text-white-50 small text-uppercase">Saniye</div>
+            </div>
+          </div>
+
+          <%= link_to "BİLET AL", play_path(@next_play.id), class: "btn btn-outline-light btn-lg align-self-start px-5" %>
+        </div>
+        <div class="col-md-4 position-relative">
+          <% if @next_play.image_url.present? %>
+            <img src="<%= @next_play.image_url %>" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" alt="<%= @next_play.title %>" style="opacity: 0.6;">
+          <% else %>
+            <div class="w-100 h-100 bg-secondary opacity-50"></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <div class="row g-4">
     <% @plays.first(3).each do |play| %>
@@ -55,6 +91,51 @@
   </div>
 </div>
 
+<!-- Testimonials Section -->
+<div class="container py-5 mb-5">
+  <div class="text-center mb-5">
+    <h2 class="display-5 fw-bold text-white text-uppercase">Seyircilerimiz Ne Diyor?</h2>
+    <div class="bg-primary mx-auto mt-3" style="width: 80px; height: 3px;"></div>
+  </div>
+
+  <% if @testimonials.any? %>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% @testimonials.each_with_index do |testimonial, index| %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <div class="row justify-content-center">
+              <div class="col-md-8 text-center">
+                <div class="mb-4 text-primary">
+                  <i class="bi bi-quote display-1"></i>
+                </div>
+                <p class="lead text-white fs-4 fst-italic mb-4">"<%= testimonial.comment %>"</p>
+                <h5 class="text-white fw-bold text-uppercase mb-1"><%= testimonial.name %></h5>
+                <% if testimonial.title.present? %>
+                  <span class="text-white-50 small"><%= testimonial.title %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% if @testimonials.count > 1 %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Önceki</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Sonraki</span>
+        </button>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center text-white-50">
+      <p>Henüz yorum eklenmemiş.</p>
+    </div>
+  <% end %>
+</div>
+
 <!-- About Teaser -->
 <div class="bg-dark py-5 border-top border-secondary position-relative overflow-hidden">
   <div class="container py-5 position-relative z-1">
@@ -62,14 +143,14 @@
       <div class="col-md-6">
         <div class="position-relative">
           <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary" style="transform: translate(-15px, -15px); z-index: -1;"></div>
-          <img src="https://images.unsplash.com/photo-1503095392237-5985e5a90186?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Backstage" class="img-fluid shadow-lg grayscale-img">
+       <br>
         </div>
       </div>
       <div class="col-md-6 text-white">
         <h2 class="display-4 fw-bold mb-4 text-uppercase">Perde Arkası</h2>
         <p class="lead text-white-50 mb-4 fs-5">
-          Bi’Ara Tiyatro sadece bir sahne değil; hikaye anlatıcılığı sanatına adanmış bir sanatçılar topluluğudur.
-          Klasik trajedilerden modern komedilere kadar, her performansa tutku ve özveri katıyoruz.
+          Bi’Ara Tiyatro, 2023 yılında bir araya gelerek çıkardığımız ilk oyunumuz ile topluluğumuzun temelini attık.
+          Repertuar tiyatro olarak tıpkı hayatın kendisi gibi bazen komedi bazen dram...
         </p>
         <%= link_to "HİKAYEMİZ", staffs_path, class: "btn btn-link text-primary p-0 text-decoration-none border-bottom border-primary fs-5 fw-bold" %>
       </div>
@@ -94,3 +175,35 @@
     transform: scale(1.05);
   }
 </style>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const countdownEl = document.getElementById("countdown");
+    if (!countdownEl) return;
+
+    const targetDate = new Date(countdownEl.dataset.date).getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = '<div class="text-white fs-3">Oyun Başladı!</div>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days.toString().padStart(2, '0');
+      document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>

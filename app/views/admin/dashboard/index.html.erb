@@ -1,17 +1,75 @@
 <% content_for :title, "Panel" %>
 
-<div class="row g-4">
+<!-- Quick Actions & Status -->
+<div class="row g-4 mb-4">
+  <div class="col-md-8">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
+      <div class="card-header border-secondary bg-transparent">
+        <h5 class="mb-0 text-white">Hızlı İşlemler</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-flex flex-wrap gap-3">
+          <%= link_to new_admin_play_path, class: "btn btn-outline-primary d-flex align-items-center gap-2" do %>
+            <i class="bi bi-plus-circle"></i> Yeni Oyun
+          <% end %>
+          <%= link_to new_admin_post_path, class: "btn btn-outline-warning d-flex align-items-center gap-2" do %>
+            <i class="bi bi-pencil-square"></i> Yeni Yazı
+          <% end %>
+          <%= link_to new_admin_staff_path, class: "btn btn-outline-success d-flex align-items-center gap-2" do %>
+            <i class="bi bi-person-plus"></i> Yeni Kişi
+          <% end %>
+          <%= link_to new_admin_gallery_image_path, class: "btn btn-outline-danger d-flex align-items-center gap-2" do %>
+            <i class="bi bi-image"></i> Yeni Görsel
+          <% end %>
+          <%= link_to new_admin_backstage_video_path, class: "btn btn-outline-info d-flex align-items-center gap-2" do %>
+            <i class="bi bi-camera-video"></i> Yeni Video
+          <% end %>
+          <%= link_to new_admin_testimonial_path, class: "btn btn-outline-light d-flex align-items-center gap-2" do %>
+            <i class="bi bi-chat-quote"></i> Yeni Yorum
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
+      <div class="card-header border-secondary bg-transparent d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 text-white">Sistem Durumu</h5>
+        <span class="badge bg-success">Online</span>
+      </div>
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <i class="bi bi-database-check text-success fs-4 me-3"></i>
+          <div>
+            <div class="text-white-50 small">Veritabanı</div>
+            <div class="text-white fw-bold">Firebase Bağlı</div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-clock-history text-info fs-4 me-3"></i>
+          <div>
+            <div class="text-white-50 small">Son Güncelleme</div>
+            <div class="text-white fw-bold"><%= l(Time.current, format: :short) %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row g-4 mb-4">
   <!-- Plays Card -->
   <div class="col-md-6 col-lg-3">
-    <div class="card border-0 shadow-sm h-100">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
       <div class="card-body d-flex align-items-center">
         <div class="flex-shrink-0 me-3">
           <div class="bg-primary bg-opacity-10 text-primary rounded p-3">
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <i class="bi bi-ticket-perforated fs-4"></i>
           </div>
         </div>
         <div>
-          <div class="text-muted small fw-medium text-uppercase">Toplam Oyun</div>
+          <div class="text-white-50 small fw-medium text-uppercase">Toplam Oyun</div>
           <div class="h3 mb-0 fw-bold text-white"><%= @plays_count %></div>
         </div>
       </div>
@@ -20,15 +78,15 @@
 
   <!-- Staff Card -->
   <div class="col-md-6 col-lg-3">
-    <div class="card border-0 shadow-sm h-100">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
       <div class="card-body d-flex align-items-center">
         <div class="flex-shrink-0 me-3">
           <div class="bg-success bg-opacity-10 text-success rounded p-3">
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <i class="bi bi-people fs-4"></i>
           </div>
         </div>
         <div>
-          <div class="text-muted small fw-medium text-uppercase">Ekip Üyesi</div>
+          <div class="text-white-50 small fw-medium text-uppercase">Ekip Üyesi</div>
           <div class="h3 mb-0 fw-bold text-white"><%= @staff_count %></div>
         </div>
       </div>
@@ -37,15 +95,15 @@
 
   <!-- Posts Card -->
   <div class="col-md-6 col-lg-3">
-    <div class="card border-0 shadow-sm h-100">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
       <div class="card-body d-flex align-items-center">
         <div class="flex-shrink-0 me-3">
           <div class="bg-warning bg-opacity-10 text-warning rounded p-3">
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+            <i class="bi bi-journal-text fs-4"></i>
           </div>
         </div>
         <div>
-          <div class="text-muted small fw-medium text-uppercase">Blog Yazısı</div>
+          <div class="text-white-50 small fw-medium text-uppercase">Blog Yazısı</div>
           <div class="h3 mb-0 fw-bold text-white"><%= @posts_count %></div>
         </div>
       </div>
@@ -54,16 +112,110 @@
 
   <!-- Gallery Card -->
   <div class="col-md-6 col-lg-3">
-    <div class="card border-0 shadow-sm h-100">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
       <div class="card-body d-flex align-items-center">
         <div class="flex-shrink-0 me-3">
           <div class="bg-danger bg-opacity-10 text-danger rounded p-3">
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <i class="bi bi-images fs-4"></i>
           </div>
         </div>
         <div>
-          <div class="text-muted small fw-medium text-uppercase">Galeri Görseli</div>
+          <div class="text-white-50 small fw-medium text-uppercase">Galeri Görseli</div>
           <div class="h3 mb-0 fw-bold text-white"><%= @gallery_count %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <!-- Upcoming Play -->
+  <div class="col-lg-4">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
+      <div class="card-header border-secondary bg-transparent">
+        <h5 class="mb-0 text-white">Sıradaki Oyun</h5>
+      </div>
+      <div class="card-body">
+        <% if @upcoming_play %>
+          <div class="text-center mb-4">
+            <% if @upcoming_play.image_url.present? %>
+              <img src="<%= @upcoming_play.image_url %>" class="img-fluid rounded mb-3" style="max-height: 200px; object-fit: cover;" alt="<%= @upcoming_play.title %>">
+            <% end %>
+            <h4 class="text-white fw-bold"><%= @upcoming_play.title %></h4>
+            <div class="badge bg-primary text-black fs-6 mb-2">
+              <%= l(@upcoming_play.date, format: :long) %>
+            </div>
+            <% 
+              days_left = ((@upcoming_play.date - Time.current) / 1.day).to_i 
+            %>
+            <div class="text-white-50">
+              <% if days_left > 0 %>
+                <%= days_left %> gün kaldı
+              <% elsif days_left == 0 %>
+                Bugün!
+              <% else %>
+                Geçti
+              <% end %>
+            </div>
+          </div>
+          <div class="d-grid">
+            <%= link_to "Düzenle", edit_admin_play_path(@upcoming_play.id), class: "btn btn-outline-light" %>
+          </div>
+        <% else %>
+          <div class="text-center py-5">
+            <i class="bi bi-calendar-x display-1 text-white-50 mb-3"></i>
+            <p class="text-white-50">Planlanmış oyun bulunmuyor.</p>
+            <%= link_to "Oyun Planla", new_admin_play_path, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="col-lg-8">
+    <div class="card bg-dark border-secondary shadow-sm h-100">
+      <div class="card-header border-secondary bg-transparent">
+        <h5 class="mb-0 text-white">Son Aktiviteler</h5>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-dark table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th class="ps-4 text-white-50">Tür</th>
+                <th class="text-white-50">Başlık</th>
+                <th class="text-white-50">Tarih</th>
+                <th class="text-end pe-4 text-white-50">İşlem</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @recent_plays.each do |play| %>
+                <tr>
+                  <td class="ps-4"><span class="badge bg-primary text-black">Oyun</span></td>
+                  <td class="text-white fw-medium"><%= play.title %></td>
+                  <td class="text-white-50"><%= l(play.date, format: :short) if play.date %></td>
+                  <td class="text-end pe-4">
+                    <%= link_to edit_admin_play_path(play.id), class: "btn btn-sm btn-outline-light" do %>
+                      <i class="bi bi-pencil"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+              <% @recent_posts.each do |post| %>
+                <tr>
+                  <td class="ps-4"><span class="badge bg-warning text-black">Blog</span></td>
+                  <td class="text-white fw-medium"><%= post.title %></td>
+                  <td class="text-white-50"><%= l(post.published_at, format: :short) if post.published_at %></td>
+                  <td class="text-end pe-4">
+                    <%= link_to edit_admin_post_path(post.id), class: "btn btn-sm btn-outline-light" do %>
+                      <i class="bi bi-pencil"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

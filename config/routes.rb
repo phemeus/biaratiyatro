@@ -7,12 +7,18 @@ Rails.application.routes.draw do
     resources :staffs
     resources :posts
     resources :gallery_images
+    resources :backstage_videos
+    resources :testimonials
   end
 
   resources :plays, only: [:index, :show]
-  resources :staffs, only: [:index]
+  resources :staffs, only: [:index], path: 'hakkimizda'
   resources :posts, only: [:index, :show]
   resources :gallery_images, only: [:index]
+  resources :contacts, only: [:index], path: 'iletisim'
+  resources :backstage, only: [:index, :show], path: 'backstage'
+  resources :subscribers, only: [:create]
+  get 'search', to: 'search#index'
 
   # Admin Authentication
   get 'login', to: 'sessions#new'
