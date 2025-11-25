@@ -7,7 +7,7 @@
     
     <div class="row g-4">
       <div class="row g-4 gallery" data-masonry='{"percentPosition": true }'>
-      <% @images.each do |image| %>
+      <% @gallery_images.each do |image| %>
         <div class="col-md-6 col-lg-4">
           <a href="<%= image.image_url %>" class="d-block position-relative ratio ratio-1x1 overflow-hidden shadow-lg border border-secondary group">
             <img src="<%= image.image_url %>" alt="<%= image.caption %>" class="w-100 h-100 object-fit-cover transition-transform duration-500 hover-scale">

@@ -27,4 +27,5 @@ Rails.application.routes.draw do
 
   # Public Routes
   root "home#index"
+  get '/alive', to: 'application#alive'
 end

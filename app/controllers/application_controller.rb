@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
 
+  def alive
+    render plain: "ok", status: :ok
+  end
+
   private
 
   def set_locale

@@ -9,7 +9,7 @@ services:
     name: bitiyatro
     env: ruby
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    startCommand: "bundle exec foreman start"
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false

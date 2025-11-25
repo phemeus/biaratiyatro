@@ -6,6 +6,7 @@ require 'firebase'
 # Better to use ENV for flexibility.
 
 FIREBASE_BASE_URI = ENV.fetch('FIREBASE_BASE_URI', 'https://biaratiyatro-a249a-default-rtdb.europe-west1.firebasedatabase.app/')
+FIREBASE_SECRET_KEY = ENV.fetch('FIREBASE_SECRET_KEY', nil)
 
-# We can create a global client instance
-$firebase = Firebase::Client.new(FIREBASE_BASE_URI)
+# Initialize Firebase client with secret key if available
+$firebase = Firebase::Client.new(FIREBASE_BASE_URI, FIREBASE_SECRET_KEY)
