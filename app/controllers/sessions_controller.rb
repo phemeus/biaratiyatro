@@ -8,14 +8,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    auth_response = FirebaseAuthService.sign_in(params[:email], params[:password])
+    user = AdminUser.find_by_username(params[:username])
     
-    if auth_response
-      session[:admin_user_id] = auth_response['localId']
-      session[:admin_email] = auth_response['email']
+    if user && user.authenticate(params[:password])
+      session[:admin_user_id] = user.id
       redirect_to admin_root_path, notice: "Başarıyla giriş yapıldı."
     else
-      flash.now[:alert] = "Geçersiz e-posta veya şifre."
+      flash.now[:alert] = "Geçersiz kullanıcı adı veya şifre."
       render :new, status: :unprocessable_entity
     end
   end

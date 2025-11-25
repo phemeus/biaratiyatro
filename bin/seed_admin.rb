@@ -1,20 +1,26 @@
+#!/usr/bin/env ruby
 require_relative '../config/environment'
 
-puts "Seeding Admin User..."
+puts "=== Admin User Seeder ==="
 
-username = "admin"
-password = "password123"
+username = "biaratiyatro@gmail.com"
+password = "biaratiyatroadmin123."
 
-# Check if admin already exists
-existing_admin = AdminUser.find_by_username(username)
+puts "Checking for existing admin user '#{username}'..."
+existing_user = AdminUser.find_by_username(username)
 
-if existing_admin
-  puts "Admin user '#{username}' already exists."
+if existing_user
+  puts "✅ Admin user '#{username}' already exists."
+  # Optional: Update password if needed
+  # existing_user.password = password
+  # existing_user.save
+  # puts "Updated password for '#{username}'."
 else
-  admin = AdminUser.new(username: username)
-  admin.password = password
+  puts "Creating new admin user '#{username}'..."
+  user = AdminUser.new(username: username)
+  user.password = password
   
-  if admin.save
+  if user.save
     puts "✅ Admin user created successfully!"
     puts "Username: #{username}"
     puts "Password: #{password}"
