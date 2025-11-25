@@ -134,6 +134,8 @@ GEM
       googleauth
       httpclient (>= 2.5.3)
       json
+    foreman (0.90.0)
+      thor (~> 1.4)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -450,6 +452,7 @@ DEPENDENCIES
   debug
   dotenv-rails (~> 3.1)
   firebase (~> 0.2.8)
+  foreman
   importmap-rails
   jbuilder
   kamal
