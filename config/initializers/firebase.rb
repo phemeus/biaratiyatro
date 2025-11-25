@@ -7,6 +7,7 @@ require 'firebase'
 
 FIREBASE_BASE_URI = ENV.fetch('FIREBASE_BASE_URI', 'https://biaratiyatro-a249a-default-rtdb.europe-west1.firebasedatabase.app/')
 FIREBASE_SECRET_KEY = ENV.fetch('FIREBASE_SECRET_KEY', nil)
+FIREBASE_API_KEY = ENV.fetch('FIREBASE_API_KEY', nil)
 
 # Initialize Firebase client with secret key if available
 $firebase = Firebase::Client.new(FIREBASE_BASE_URI, FIREBASE_SECRET_KEY)

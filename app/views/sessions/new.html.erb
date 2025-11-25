@@ -23,8 +23,8 @@
 
             <%= form_with url: login_path, local: true do |f| %>
               <div class="mb-4">
-                <%= f.label :username, "Kullanıcı Adı", class: "form-label text-uppercase small fw-bold text-white-50" %>
-                <%= f.text_field :username, class: "form-control bg-black border-secondary text-white rounded-0 py-2 focus-primary", required: true %>
+                <%= f.label :email, "E-posta", class: "form-label text-uppercase small fw-bold text-white-50" %>
+                <%= f.email_field :email, class: "form-control bg-black border-secondary text-white rounded-0 py-2 focus-primary", required: true %>
               </div>
 
               <div class="mb-5">
