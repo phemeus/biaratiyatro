@@ -64,7 +64,7 @@ group :test do
 end
 
 gem "firebase", "~> 0.2.8"
-gem "dotenv-rails", "~> 3.1"
+gem "dotenv-rails", "~> 3.2"
 
 gem "bootstrap", "~> 5.3"
 gem "sassc-rails", "~> 2.1"
